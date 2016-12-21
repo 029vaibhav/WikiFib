@@ -1,7 +1,11 @@
 package com.teamie.wikifib.playscreen;
 
+import com.teamie.wikifib.bean.GameData;
 import com.teamie.wikifib.bean.WikiResponse;
 import com.teamie.wikifib.interfaces.DataExtractor;
+import com.teamie.wikifib.interfaces.WordExtractor;
+
+import java.util.List;
 
 import retrofit2.Response;
 
@@ -13,14 +17,14 @@ public class PlayModel {
 
     private static PlayModel playModel;
 
-    public static PlayModel getInstance() {
+    static PlayModel getInstance() {
         if (playModel == null)
             playModel = new PlayModel();
         return playModel;
     }
 
-    public WikiResponse getDataFromServer() {
-        DataExtractor dataExtractor = new DataExtractorImpl();
+    WikiResponse getDataFromServer() {
+        DataExtractor dataExtractor = DataExtractorFactory.getInstance().getImplementation();
         Response<WikiResponse> data = dataExtractor.getData();
         if (data.isSuccessful()) {
             WikiResponse body = data.body();
@@ -34,6 +38,12 @@ public class PlayModel {
 
         return true;
     }
-    
+
+    List<GameData> getGameData(String s) {
+
+
+        WordExtractor
+    }
+
 
 }
