@@ -35,7 +35,7 @@ public class TextRazorLevelDecider implements LevelDecider {
         } else if (level < 10) {
             strings.add(WORD);
             strings.add(ENTITIES);
-        } else if (level < 10) {
+        } else if (level < 15) {
             strings.add(WORD);
             strings.add(ENTITIES);
             strings.add(RELATIONS);
@@ -48,7 +48,7 @@ public class TextRazorLevelDecider implements LevelDecider {
     public List<String> wordsAsFib(Object... params) {
 
         Response response = (Response) params[0];
-        List<String> strings = (List<String>) params[0];
+        List<String> strings = (List<String>) params[1];
 
 
         List<String> words = new ArrayList<>();

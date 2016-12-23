@@ -24,6 +24,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE*'
+    }
 }
 
 dependencies {
@@ -39,6 +42,8 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
     compile 'com.android.support:support-v4:25.1.0'
     compile 'com.textrazor:textrazor:1.0.9'
+    compile 'org.apmem.tools:layouts:1.10@aar'
+
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     provided 'org.projectlombok:lombok:1.12.2'

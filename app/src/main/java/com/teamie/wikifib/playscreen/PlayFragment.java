@@ -6,12 +6,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.teamie.wikifib.R;
 
+import org.apmem.tools.layouts.FlowLayout;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -21,7 +24,9 @@ public class PlayFragment extends Fragment {
 
     public static final String TAG = "PlayFragment";
     @BindView(R.id.linear_layout)
-    LinearLayout linearLayout;
+    FlowLayout linearLayout;
+    @BindView(R.id.text)
+    TextView textView;
     Unbinder unbinder;
 
 
@@ -40,6 +45,8 @@ public class PlayFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_blank, container, false);
         unbinder = ButterKnife.bind(this, viewGroup);
+        PlayPresenter.getInstance(getContext()).CreateGame(linearLayout);
+//        PlayPresenter.getInstance(getContext()).analyzeData();
 
 
         return viewGroup;
@@ -49,5 +56,11 @@ public class PlayFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick(R.id.submit)
+    public void onClick() {
+
+        PlayPresenter.getInstance(getContext()).submit();
     }
 }

@@ -1,6 +1,8 @@
-package com.teamie.wikifib.playscreen;
+package com.teamie.wikifib.gameengine.factories;
 
-import com.teamie.wikifib.interfaces.WordExtractor;
+import com.teamie.wikifib.gameengine.defaultimpl.DefaultWordExtractorImpl;
+import com.teamie.wikifib.gameengine.textrazor.WordExtractorImpl;
+import com.teamie.wikifib.gameengine.interfaces.WordExtractor;
 
 /**
  * Created by vaibhav on 21/12/16.
@@ -19,7 +21,7 @@ public class WordExtractorFactory {
     }
 
     public WordExtractor getImplementation() {
-        WordExtractor wordExtractor = new WordExtractorImpl();
+        WordExtractor wordExtractor = new DefaultWordExtractorImpl();
         return wordExtractor;
     }
 }

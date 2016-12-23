@@ -10,7 +10,7 @@ import retrofit2.http.GET;
  */
 public interface ApiInterface {
 
-    @GET("?format=json&action=query&generator=random&grnnamespace=0&prop=extracts&explaintext=rvprop=title&grnlimit=1")
+    @GET("api.php?format=json&action=query&generator=random&grnnamespace=0&prop=extracts&explaintext=rvprop=title&grnlimit=1")
     Call<WikiResponse> getData();
 
 

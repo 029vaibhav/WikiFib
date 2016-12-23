@@ -1,4 +1,4 @@
-package com.teamie.wikifib.interfaces;
+package com.teamie.wikifib.gameengine.interfaces;
 
 import retrofit2.Response;
 

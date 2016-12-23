@@ -1,4 +1,4 @@
-package com.teamie.wikifib.interfaces;
+package com.teamie.wikifib.gameengine.interfaces;
 
 import com.teamie.wikifib.bean.GameData;
 
@@ -12,5 +12,5 @@ public interface WordExtractor<T> {
 
     T extractWords(String s, List<String> criteria);
 
-    List<GameData> manipulateAndConvertData(String s, int level);
+    GameData manipulateAndConvertData(String s, int level);
 }

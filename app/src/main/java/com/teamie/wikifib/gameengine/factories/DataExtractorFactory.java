@@ -1,6 +1,7 @@
-package com.teamie.wikifib.playscreen;
+package com.teamie.wikifib.gameengine.factories;
 
-import com.teamie.wikifib.interfaces.DataExtractor;
+import com.teamie.wikifib.gameengine.wiki.WikiDataExtractorImpl;
+import com.teamie.wikifib.gameengine.interfaces.DataExtractor;
 
 /**
  * Created by vaibhav on 21/12/16.
@@ -19,7 +20,7 @@ public class DataExtractorFactory {
     }
 
     public DataExtractor getImplementation() {
-        DataExtractor dataExtractor = new DataExtractorImpl();
+        DataExtractor dataExtractor = new WikiDataExtractorImpl();
         return dataExtractor;
     }
 }

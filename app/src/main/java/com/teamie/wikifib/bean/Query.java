@@ -2,6 +2,8 @@ package com.teamie.wikifib.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.HashMap;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +18,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Query {
 
-    private Pages pages;
+    HashMap<String, Data> pages;
 
 }
