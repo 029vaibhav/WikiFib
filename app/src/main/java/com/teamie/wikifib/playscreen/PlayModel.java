@@ -5,12 +5,16 @@ import com.teamie.wikifib.bean.MyWord;
 import com.teamie.wikifib.bean.WikiResponse;
 import com.teamie.wikifib.gameengine.factories.DataExtractorFactory;
 import com.teamie.wikifib.gameengine.interfaces.DataExtractor;
+import com.teamie.wikifib.utils.Constants;
+import com.teamie.wikifib.utils.Utilities;
 
 import java.text.BreakIterator;
 import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Response;
+
+import static com.teamie.wikifib.utils.Constants.LEVEL_KEY;
 
 /**
  * Created by vaibhav on 20/12/16.
@@ -20,7 +24,7 @@ public class PlayModel {
 
     private static PlayModel playModel;
 
-    static PlayModel getInstance() {
+    public static PlayModel getInstance() {
         if (playModel == null)
             playModel = new PlayModel();
         return playModel;
@@ -29,12 +33,13 @@ public class PlayModel {
     String getDataFromServer() {
         DataExtractor dataExtractor = DataExtractorFactory.getInstance().getImplementation();
         Response<WikiResponse> data = dataExtractor.getData();
-        if (data.isSuccessful()) {
-            String body = data.body().getQuery().getPages().entrySet().iterator().next().getValue().getExtract()
-                    .replaceAll("==\\s[A-za-z1-9\\s]+\\s==", "").trim().replace("\n", "");
-            return isDataBig(body) ? body : getDataFromServer();
+        if (data != null)
+            if (data.isSuccessful()) {
+                String body = data.body().getQuery().getPages().entrySet().iterator().next().getValue().getExtract()
+                        .replaceAll("==\\s[A-za-z1-9\\s]+\\s==", "").trim().replace("\n", "");
+                return isDataBig(body) ? body : getDataFromServer();
 
-        }
+            }
         return null;
     }
 
@@ -59,6 +64,18 @@ public class PlayModel {
 
 
         return null;
+    }
+
+    public int getLevel() {
+        return Utilities.getInstance().getFromSharedPreference(LEVEL_KEY);
+    }
+
+    public void setLevel(int count) {
+        if (count == 10) {
+            Constants.level++;
+            Utilities.getInstance().saveInSharedPreference(LEVEL_KEY, Constants.level);
+        }
+
     }
 
 

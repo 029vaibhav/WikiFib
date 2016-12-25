@@ -1,37 +1,73 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.teamie.wikifib.playscreen.PlayFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/submit">
+        android:padding="8dp"
+        tools:context="com.teamie.wikifib.playscreen.PlayFragment">
 
-        <org.apmem.tools.layouts.FlowLayout
-            android:id="@+id/linear_layout"
+
+        <TextView
+            android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:text="@string/hello_blank_fragment">
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:text="@string/level"
+            android:textStyle="bold" />
 
-            <TextView
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/submit"
+            android:layout_below="@+id/text">
 
-                android:id="@+id/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <org.apmem.tools.layouts.FlowLayout
+                android:id="@+id/linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:text="@string/hello_blank_fragment">
 
-        </org.apmem.tools.layouts.FlowLayout>
-    </ScrollView>
+            </org.apmem.tools.layouts.FlowLayout>
+        </ScrollView>
 
-    <Button
+        <Button
+            android:id="@+id/submit"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/accent_fill"
+            android:text="@string/submit"
+            android:textStyle="bold" />
 
-        android:id="@+id/submit"
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/pageloader"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/submit" />
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_wait" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image"
+            android:layout_centerInParent="true"
+            android:text="@string/loading_text" />
+
+    </RelativeLayout>
+
+</FrameLayout>

@@ -6,6 +6,7 @@ import com.teamie.wikifib.gameengine.interfaces.WordExtractor;
 import com.teamie.wikifib.level.LevelDecider;
 import com.teamie.wikifib.level.TextRazorLevelDecider;
 import com.teamie.wikifib.utils.Constants;
+import com.teamie.wikifib.utils.Utilities;
 import com.textrazor.AnalysisException;
 import com.textrazor.NetworkException;
 import com.textrazor.TextRazor;
@@ -13,17 +14,12 @@ import com.textrazor.annotations.AnalyzedText;
 import com.textrazor.annotations.Response;
 
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 /**
  * Created by vaibhav on 21/12/16.
  */
 
-public class WordExtractorImpl implements WordExtractor<AnalyzedText> {
+public class TextRazaorWordExtractorImpl implements WordExtractor<AnalyzedText> {
 
 
     @Override
@@ -47,26 +43,33 @@ public class WordExtractorImpl implements WordExtractor<AnalyzedText> {
         LevelDecider levelDecider = new TextRazorLevelDecider();
         List<String> criteria = levelDecider.levelCriteria(level);
         AnalyzedText analyzedText = getDataInBackground(s, criteria);
+        if (analyzedText == null) {
+            Utilities.getInstance().showAlertDialog();
+            return null;
+        }
         Response response = analyzedText.getResponse();
         GameData gameData = LogicFactory.getInstance().LogicFactory().getGameData(response, s);
         return gameData;
     }
 
     private AnalyzedText getDataInBackground(final String s, final List<String> criteria) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Callable callable = new Callable() {
-            @Override
-            public AnalyzedText call() throws Exception {
-                return extractWords(s, criteria);
-            }
-        };
 
-        Future submit = executorService.submit(callable);
-        try {
-            AnalyzedText o = (AnalyzedText) submit.get();
-            return o;
-        } catch (InterruptedException | ExecutionException e) {
-        }
-        return null;
+
+        return extractWords(s, criteria);
+//        ExecutorService executorService = Executors.newSingleThreadExecutor();
+//        Callable callable = new Callable() {
+//            @Override
+//            public AnalyzedText call() throws Exception {
+//                return;
+//            }
+//        };
+//
+//        Future submit = executorService.submit(callable);
+//        try {
+//            AnalyzedText o = (AnalyzedText) submit.get();
+//            return o;
+//        } catch (InterruptedException | ExecutionException e) {
+//        }
+//        return null;
     }
 }
