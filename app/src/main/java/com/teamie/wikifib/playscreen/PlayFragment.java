@@ -63,12 +63,12 @@ public class PlayFragment extends Fragment implements AsyncListener<GameData> {
         // Inflate the layout for this fragment
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_blank, container, false);
         unbinder = ButterKnife.bind(this, viewGroup);
-        PlayPresenter.getInstance(getContext()).setLevel(textView);
+        PlayPresenter.getInstance(getActivity()).setLevel(textView);
         Animation animation = AnimationUtils.loadAnimation(getContext(),
                 R.anim.slide);
         animation.setRepeatMode(Animation.INFINITE);
         imageView.setAnimation(animation);
-        PlayPresenter.getInstance(getContext()).CreateGame(linearLayout, this);
+        PlayPresenter.getInstance(getActivity()).CreateGame(linearLayout, this);
         return viewGroup;
     }
 
@@ -81,7 +81,7 @@ public class PlayFragment extends Fragment implements AsyncListener<GameData> {
     @OnClick(R.id.submit)
     public void onClick() {
 
-        GameData gameData = PlayPresenter.getInstance(getContext()).validate();
+        GameData gameData = PlayPresenter.getInstance(getActivity()).validate();
         if (gameData != null) {
             Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(ResultDisplayFragment.TAG);
             if (fragment == null)
@@ -102,13 +102,13 @@ public class PlayFragment extends Fragment implements AsyncListener<GameData> {
         if (gameData == null) {
             Utilities.getInstance().showAlertDialog();
         } else {
-            PlayPresenter.getInstance(getContext()).populateDetails(gameData);
+            PlayPresenter.getInstance(getActivity()).populateDetails(gameData);
         }
     }
 
     @Override
     public GameData doInBackground() {
-        return PlayPresenter.getInstance(getContext()).analyzeData();
+        return PlayPresenter.getInstance(getActivity()).analyzeData();
 
     }
 

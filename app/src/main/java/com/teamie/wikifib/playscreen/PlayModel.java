@@ -36,8 +36,9 @@ public class PlayModel {
         if (data != null)
             if (data.isSuccessful()) {
                 String body = data.body().getQuery().getPages().entrySet().iterator().next().getValue().getExtract()
-                        .replaceAll("==\\s[A-za-z1-9\\s]+\\s==", "").trim().replace("\n", "");
+                        .replaceAll("==\\s[A-za-z1-9\\s]+\\s==", "").trim().replace("\n", "").replace("=", "");
                 return isDataBig(body) ? body : getDataFromServer();
+
 
             }
         return null;
@@ -55,9 +56,7 @@ public class PlayModel {
                 break;
         }
 
-        if (i == 10)
-            return true;
-        return false;
+        return i == 10;
     }
 
     List<GameData> getGameData(String s) {

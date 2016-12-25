@@ -34,20 +34,10 @@ public class TextRazorLogicDecider implements LogicDecider<Response> {
 
         GameData gameData = new GameData();
         gameData.setText(content);
-//        List<String> strings = TextRazorLevelDecider.getInstance().levelCriteria(Constants.level);
         BreakIterator sentenceIterator = BreakIterator.getSentenceInstance(Locale.US);
         sentenceIterator.setText(content);
         first = sentenceIterator.first();
         next = sentenceIterator.next();
-//        if (strings.size() == 1) {
-//            for (int i = 0; i < 10; i++) {
-//                String line = content.substring(first, next);
-//                defaultSelection(line, gameData, i, response, sentenceIterator);
-//            }
-//
-//
-//        } else if (strings.size() > 1) {
-
         List<Entity> entities = response.getEntities();
         Set<String> entitySet = new HashSet<>();
         for (Entity entity : entities) {
@@ -92,10 +82,11 @@ public class TextRazorLogicDecider implements LogicDecider<Response> {
                     words.add(word);
             }
 
+            if (words.size()>0){
             Random r = new Random();
             int selectedWordPos = r.nextInt(words.size());
             word = words.get(selectedWordPos);
-            fillGameData(line, word, gameData, i);
+            fillGameData(line, word, gameData, i);}
         }
         nextSentenceIterate(sentenceIterator, next);
 

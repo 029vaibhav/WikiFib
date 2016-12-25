@@ -1,19 +1,29 @@
 package com.teamie.wikifib.home;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.teamie.wikifib.R;
+import com.teamie.wikifib.utils.Constants;
 import com.teamie.wikifib.utils.Utilities;
 
 import butterknife.ButterKnife;
 
 public class HomeActivity extends AppCompatActivity {
 
-    boolean doubleBackToExitPressedOnce = false;
+    long back_pressed;
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         Utilities.getInstance().setContext(this);
+        Constants.level = Utilities.getInstance().getFromSharedPreference(Constants.LEVEL_KEY);
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(BaseFragment.TAG);
         if (fragment == null)
             fragment = new BaseFragment();
@@ -34,17 +45,18 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
+        if (back_pressed + 2000 > System.currentTimeMillis())
             super.onBackPressed();
-            return;
-        }
-        this.doubleBackToExitPressedOnce = true;
-        Utilities.getInstance().toast(getString(R.string.back_press));
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
+        else {
+            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                Utilities.getInstance().toast(getString(R.string.back_press));
+                back_pressed = System.currentTimeMillis();
+            } else {
+                super.onBackPressed();
             }
-        }, 2000);
+        }
+
+
     }
+
 }

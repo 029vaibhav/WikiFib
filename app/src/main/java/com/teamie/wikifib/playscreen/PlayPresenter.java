@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -64,7 +65,6 @@ public class PlayPresenter {
         this.view = view;
         DataFromServerAsync dataFromServerAsync = new DataFromServerAsync(asyncListener, context);
         dataFromServerAsync.execute();
-
     }
 
     public GameData getGameData() {
@@ -80,7 +80,7 @@ public class PlayPresenter {
 
             @Override
             public void onClick(View widget) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(
+                final AlertDialog.Builder builder = new AlertDialog.Builder(
                         context);
                 builder.setItems(stringList, new DialogInterface.OnClickListener() {
                     @Override

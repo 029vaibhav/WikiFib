@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.teamie.wikifib.R;
@@ -20,6 +21,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Utilities {
 
+    public static String TAG = "Utilities";
     public static Utilities utilities;
     private ProgressDialog progressDialog;
 
@@ -46,8 +48,7 @@ public class Utilities {
 
     public int getFromSharedPreference(String key) {
         SharedPreferences editor = context.getSharedPreferences(getContext().getString(R.string.app_name), MODE_PRIVATE);
-        int level = editor.getInt(key, 0);
-        return level;
+        return editor.getInt(key, 1);
 
     }
 
@@ -71,6 +72,7 @@ public class Utilities {
 
     public void showAlertDialog() {
 
+        Log.d(TAG, "showing no internet alert dialog");
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("ERROR !!");
         builder.setMessage("Sorry there was an error getting data from the Internet.\nNetwork Unavailable!");
