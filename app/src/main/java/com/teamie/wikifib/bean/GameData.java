@@ -4,8 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.core.SerializableString;
 import com.teamie.wikifib.bean.enums.TextType;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import lombok.AccessLevel;
@@ -20,7 +22,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class GameData implements Parcelable {
+public class GameData implements Parcelable,Serializable {
 
     HashMap<Integer, MyWord> removedWords = new HashMap<>();
     HashMap<Integer, MyWord> userSelectedWords = new HashMap<>();

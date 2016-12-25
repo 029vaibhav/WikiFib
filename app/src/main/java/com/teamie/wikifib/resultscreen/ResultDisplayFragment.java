@@ -53,7 +53,7 @@ public class ResultDisplayFragment extends Fragment implements View.OnClickListe
     Unbinder unbinder;
     @BindView(R.id.submit)
     Button submit;
-    @BindColor(R.color.dark_green)
+    @BindColor(R.color.green)
     int darkGreen;
 
 
@@ -115,7 +115,7 @@ public class ResultDisplayFragment extends Fragment implements View.OnClickListe
                 SpannableStringBuilder ssb = new SpannableStringBuilder();
                 ssb.append(wordtoSpan);
                 ssb.replace(i1, i1 + 7, correctWord);
-                ssb.setSpan(new ForegroundColorSpan(Color.GREEN), userSelectedWord.getStart(), userSelectedWord.getEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                ssb.setSpan(new ForegroundColorSpan(darkGreen), userSelectedWord.getStart(), userSelectedWord.getEnd(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 wordtoSpan = SpannableString.valueOf(ssb);
 
             } else {

@@ -24,7 +24,9 @@ import com.teamie.wikifib.network.DataFromServerAsync;
 
 import org.apmem.tools.layouts.FlowLayout;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import static com.teamie.wikifib.utils.Constants.BLANK;
 
@@ -38,7 +40,7 @@ public class PlayPresenter {
     private Context context;
     private GameData gameData;
     private FlowLayout view;
-    private String[] stringList = new String[10];
+    private String[] stringList;
     private String black = "#000000";
 
 
@@ -136,12 +138,6 @@ public class PlayPresenter {
 
     }
 
-    void populateDataWithView(FlowLayout view, GameData gameData) {
-        this.view = view;
-        populateDetails(gameData);
-
-    }
-
     public void populateDetails(GameData gameData) {
         if (gameData == null)
             return;
@@ -149,10 +145,14 @@ public class PlayPresenter {
         int i = 0;
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Fill your blank");
+        Set<String> stringSet = new HashSet<>();
         for (Map.Entry<Integer, MyWord> integerStringEntry : gameData.getRemovedWords().entrySet()) {
-            stringList[i] = integerStringEntry.getValue().getText();
+            stringSet.add(integerStringEntry.getValue().getText());
             i++;
         }
+        stringList = stringSet.toArray(new String[stringSet.size()]);
+
+
         for (i = 0; i < 10; i++) {
 
             String string = gameData.getTextViewHashMap().get(i);
