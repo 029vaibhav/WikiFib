@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.teamie.wikifib.R;
+import com.teamie.wikifib.playscreen.PlayPresenter;
 import com.teamie.wikifib.utils.Constants;
 import com.teamie.wikifib.utils.Utilities;
 
@@ -22,6 +23,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        PlayPresenter.getInstance(this).destroyPresenter();
         super.onDestroy();
     }
 

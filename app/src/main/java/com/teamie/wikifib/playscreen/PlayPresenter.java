@@ -9,7 +9,6 @@ import android.text.Editable;
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -53,6 +52,10 @@ public class PlayPresenter {
         if (playPresenter == null)
             playPresenter = new PlayPresenter(context);
         return playPresenter;
+    }
+
+    public void destroyPresenter() {
+        playPresenter = null;
     }
 
     private String getDataFromServer() {
